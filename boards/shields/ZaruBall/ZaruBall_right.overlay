@@ -1,5 +1,6 @@
 #include "ZaruBall.dtsi"
 #include <dt-bindings/zmk/input_transform.h>
+#include <input/processors.dtsi>
 
 &xiao_serial { status = "disabled"; };
 
@@ -22,8 +23,13 @@
 };
 
 // pmw-3610
+&zip_temp_layer {
+    require-prior-idle-ms = <200>;
+};
+
 &trackball_listener {
     status = "okay";
     compatible = "zmk,input-listener";
     device = <&trackball>;
+    input-processors = <&zip_temp_layer 5 10000>;
 };
